@@ -1,4 +1,5 @@
 let clickCounter = 1;
+//using arrays and objects to avoid hard-coding
 let ids = ["topleft", "topmiddle", "topright", "midleft", "midmid", "midright", "bottomleft", "bottommid", "bottomright"]
 let combos = ["topLine", "midLine", "botLine", "leftSide", "midCol", "rightSide", "leftRight", "rightLeft"]
 let possibleCombos = {
@@ -16,7 +17,10 @@ let possibleCombos = {
 
 
 function click(htmlid){
+    
+    // resets the "winner"
     document.getElementById("winner").innerHTML = "Winner";
+    // First player turn
     if(document.getElementById(htmlid).innerHTML === "-"){
         if (clickCounter % 2 == 1){
             document.getElementById(htmlid).innerHTML = "X";
@@ -66,7 +70,8 @@ function click(htmlid){
                     break;
                 };
             checkforV(); 
-            } else if (clickCounter % 2 == 0){
+        // second player turn    
+        } else if (clickCounter % 2 == 0){
             document.getElementById(htmlid).innerHTML = "O";
             clickCounter++;
             switch(htmlid){
@@ -115,7 +120,21 @@ function click(htmlid){
                 };
             checkforV();        
         } if (clickCounter > 9){
-            alert("gameover")
+            alert("Gameover - Tie")
+            for (let i = 0; i < ids.length; i++){
+                document.getElementById(ids[i]).innerHTML = "-";
+            }
+            possibleCombos = {
+                topLine: [],
+                midLine: [],
+                botLine: [],
+                leftSide: [],
+                midCol: [],
+                rightSide: [],
+                leftRight: [],
+                rightLeft: []
+            }
+            clickCounter = 1;
         }
     }
 } 
